@@ -6,14 +6,13 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D body;
     public float speed;
 
-    void Start () {
+    void Start ()
+    {
         body = GetComponent<Rigidbody2D>();
-        Renderer rend = GetComponent<Renderer>();
-        rend.material.shader = Shader.Find("Standard");
-        rend.material.SetColor("_Color", Color.red);
     }
 	
-	void Update () {
+	void Update ()
+    {
 	
 	}
 

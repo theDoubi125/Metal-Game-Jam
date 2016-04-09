@@ -5,6 +5,7 @@ public class MoshPitSpawner : MonoBehaviour
 {
     public Transform entityPrefab;
 
+    public float circlePitRatio = 0.3f;
     public int entityCount;
     public float radius;
     public float wodMinDelay, wodMaxDelay;
@@ -42,7 +43,7 @@ public class MoshPitSpawner : MonoBehaviour
             {
                 currentPitState = pitState.CirclePit;
                 foreach (var entity in entities)
-                    if (Random.value > 0.5f)
+                    if (Random.value > circlePitRatio)
                         entity.StartCirclePit();
             }
             else if (currentPitState == pitState.CirclePit)
