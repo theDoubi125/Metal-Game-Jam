@@ -4,7 +4,6 @@ using System.Collections;
 public class TelephoneBehaviour : MonoBehaviour {
 
 	private GameObject telephone;
-	private GameObject telephoneText;
 
 	bool telephoneMoving;
 	bool telephoneVisible;
@@ -16,19 +15,14 @@ public class TelephoneBehaviour : MonoBehaviour {
 	void Start () {
 
 		telephone = GameObject.Find ("Telephone");
-		telephoneText = GameObject.Find ("Telephone/Message");
 
 		telephoneMoving = false;
-		telephoneVisible = true;
+		telephoneVisible = false;
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		if (Input.GetKeyUp (KeyCode.T)) {
-			Debug.Log("test");
-		}
 
 		if (telephoneMoving) {
 			MovePhone();
@@ -58,8 +52,6 @@ public class TelephoneBehaviour : MonoBehaviour {
 		{
 			if (telephone.transform.position.y > hiddenPhonePos) 
 			{
-				Debug.Log(telephone.transform.position.y);
-				Debug.Log(Time.deltaTime*3);
 				telephone.transform.Translate(new Vector3(0,- Time.deltaTime*3,0));
             }
 
@@ -83,8 +75,33 @@ public class TelephoneBehaviour : MonoBehaviour {
 		telephoneMoving = false;
 	}
 
-	public void SetTelephoneText(string text)
+	public static void SetTelephoneText(string textToWrite)
 	{
+		GameObject textObject = GameObject.Find ("Telephone/Message");
+		if (textObject != null) 
+		{
+			textObject.GetComponent<TextMesh> ().text = FormatText(textToWrite);
+		}
+	}
+
+	public static string FormatText(string textToWrite)
+	{
+		string textToReturn = "";
+
+		for (int i=0; i<7; ++i) //phone has capacity of 7 lines
+		{
+			string currentSubstring = textToWrite.Substring(0,19);
+			int lastWhiteSpace = currentSubstring.LastIndexOf(" ");
+			if (lastWhiteSpace == -1)
+			{
+				textToReturn = textToReturn + currentSubstring;
+				break;
+			}
+			textToReturn = textToReturn + currentSubstring.Substring(0,lastWhiteSpace) + "\n";
+			textToWrite = textToWrite.Substring(lastWhiteSpace + 1);
+		}
+
+		return textToReturn;
 	}
 
 }
