@@ -26,7 +26,6 @@ public class MoshPitEntity : MonoBehaviour
 
     public void StartCirclePit()
     {
-        print("Destroy " + currentBehaviour);
         circlePitBehaviour.enabled = true;
         pogoBehaviour.enabled = false;
     }

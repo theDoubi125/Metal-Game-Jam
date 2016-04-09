@@ -10,6 +10,7 @@ public class PogoEntity : MonoBehaviour
 
     private Rigidbody2D body;
     private CircleCollider2D circleCollider;
+    private float maxForce = 200;
 
     void Start ()
     {
@@ -22,7 +23,8 @@ public class PogoEntity : MonoBehaviour
 	    foreach(var other in colliding)
         {
             Vector2 forceDir = (Vector2)(transform.position - other.transform.position);
-            body.AddForce(forceDir.normalized * strengthRatio / forceDir.magnitude);
+            float force = Mathf.Min(strengthRatio / forceDir.magnitude, maxForce);
+            body.AddForce(forceDir.normalized * force);
         }
 	}
 
