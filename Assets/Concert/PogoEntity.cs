@@ -24,7 +24,8 @@ public class PogoEntity : MonoBehaviour
         {
             Vector2 forceDir = (Vector2)(transform.position - other.transform.position);
             float force = Mathf.Min(strengthRatio / forceDir.magnitude, maxForce);
-            body.AddForce(forceDir.normalized * force);
+            if(other.attachedRigidbody != null && body != null)
+                body.AddForce(forceDir.normalized * force * other.attachedRigidbody.mass / body.mass);
         }
 	}
 
