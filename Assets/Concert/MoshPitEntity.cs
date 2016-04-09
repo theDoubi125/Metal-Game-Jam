@@ -3,34 +3,37 @@ using System.Collections;
 
 public class MoshPitEntity : MonoBehaviour
 {
-    public float targetRadius, pushStrength, pushMinDelay, pushMaxDelay;
-    public Vector2 target;
-    public float time;
-    private Rigidbody2D body;
+    public float pushStrength, circlePitSpeed, circlePitCloseSpeed;
+    private MoshPitBehaviour currentBehaviour;
+    MoshPitSpawner spawner;
+    CirclePitBehaviour circlePitBehaviour;
+    PogoBehaviour pogoBehaviour;
 
-	void Start ()
+    void Start ()
     {
-        body = GetComponent<Rigidbody2D>();
-	}
-	
-	void FixedUpdate ()
-    {
-        time -= Time.fixedDeltaTime;
-        if(time <= 0)
-        {
-            Push();
-        }
-	}
 
-    private void ResetDelay()
-    {
-        time = pushMinDelay + Random.value * (pushMaxDelay - pushMinDelay);
     }
 
-    private void Push()
+    public void Init(MoshPitSpawner spawner)
     {
-        Vector2 pushtarget = target + Random.insideUnitCircle * targetRadius;
-        body.AddForce((pushtarget - (Vector2)transform.position).normalized * pushStrength / Time.fixedDeltaTime);
-        ResetDelay();
+        this.spawner = spawner;
+        circlePitBehaviour = GetComponent<CirclePitBehaviour>();
+        pogoBehaviour = GetComponent<PogoBehaviour>();
+        circlePitBehaviour.Init(spawner, spawner.transform.position, spawner.radius, circlePitCloseSpeed, circlePitSpeed);
+        pogoBehaviour.Init(spawner, spawner.transform.position, spawner.radius, pushStrength, 1, 2);
+        StartPogo();
+    }
+
+    public void StartCirclePit()
+    {
+        print("Destroy " + currentBehaviour);
+        circlePitBehaviour.enabled = true;
+        pogoBehaviour.enabled = false;
+    }
+
+    public void StartPogo()
+    {
+        circlePitBehaviour.enabled = false;
+        pogoBehaviour.enabled = true;
     }
 }
