@@ -16,19 +16,13 @@ public class WeaponSpot : MonoBehaviour {
     {
         if (col.tag == "Player" && currentWeapon != EnumWeapons.WeaponId.NO_WEAPON)
         {
-            print("Switch weapon");
-           
             WeaponManager weaponManager = col.gameObject.GetComponent<WeaponManager>();
             if (weaponManager)
             {
                 EnumWeapons.WeaponId tmpWeapon = weaponManager.currentWeapon;
-                weaponManager.currentWeapon = currentWeapon;
+                weaponManager.setWeapon(currentWeapon);
                 currentWeapon = tmpWeapon;
-                // Update spot graphics
-
                 updateSprite();
-
-                print("CurrentWeapon : "+currentWeapon);
             }
 
         }
