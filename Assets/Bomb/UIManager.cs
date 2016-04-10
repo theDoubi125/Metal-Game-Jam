@@ -38,5 +38,6 @@ public class UIManager : MonoBehaviour
         GameState.instance.SetRunning(false);
         bombUI.SetActive(true);
         toolIconUI.SetActive(true);
+		bottomUI.SetActive (true);
     }
 }
