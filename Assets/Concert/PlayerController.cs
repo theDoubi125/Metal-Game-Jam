@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D body;
     public float speed;
 
+    private static PlayerController instance;
+    public static PlayerController Instance { get { if (instance == null) instance = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>(); return instance; } }
+
     void Start ()
     {
         body = GetComponent<Rigidbody2D>();
