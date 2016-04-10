@@ -14,6 +14,10 @@ public class MoshPitEntity : MonoBehaviour
 
     }
 
+    void Update()
+    {
+    }
+
     public void Init(MoshPitSpawner spawner)
     {
         this.spawner = spawner;
