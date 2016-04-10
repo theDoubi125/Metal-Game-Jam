@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
                 bottomUI.SetActive(true);
                 toolIconUI.SetActive(true);
                 GameState.instance.SetRunning(false);
-            }
+            } 
         }
     }
 
