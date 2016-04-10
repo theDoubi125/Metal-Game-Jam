@@ -14,6 +14,15 @@ public class PlayerChangeRoomTrigger : MonoBehaviour {
             if (playerState)
                 playerState.setRoom(associatedRoom);
 
+			if (playerState.currentRoom == PlayerState.EnumRooms.Concert)
+			{
+				TelephoneBehaviour.SetMessageVisible(false);
+			}
+			else
+			{
+				TelephoneBehaviour.SetMessageVisible(true);
+			}
+
             AmbianceMusic ambianceMusicComponent = col.gameObject.GetComponent<AmbianceMusic>();
             if (ambianceMusicComponent)
                 ambianceMusicComponent.isFilter = isFilterValue;
