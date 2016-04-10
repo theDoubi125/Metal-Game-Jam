@@ -15,10 +15,12 @@ public class Wires : MonoBehaviour {
     public void CutFirst()
     {
         CutWire(1);
+        print("CUR FIRST");
     }
 
     public void CutSecond()
     {
+        print("CUT SECOND");
         CutWire(2);
     }
 
