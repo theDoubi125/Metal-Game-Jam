@@ -12,13 +12,25 @@ public class UIManager : MonoBehaviour
 	void Update () {
         if (Input.GetButtonDown("Cancel"))
         {
-            bombUI.SetActive(false);
-            toolIconUI.SetActive(false);
+            if(bombUI.active)
+            {
+                bombUI.SetActive(false);
+                toolIconUI.SetActive(false);
+                GameState.instance.SetRunning(true);
+            }
+            else
+            {
+
+                bombUI.SetActive(true);
+                toolIconUI.SetActive(true);
+                GameState.instance.SetRunning(false);
+            }
         }
     }
 
     public void OpenBombMenu()
     {
+        GameState.instance.SetRunning(false);
         bombUI.SetActive(true);
         toolIconUI.SetActive(true);
     }

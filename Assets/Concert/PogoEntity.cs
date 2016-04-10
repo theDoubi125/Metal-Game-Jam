@@ -19,11 +19,17 @@ public class PogoEntity : MonoBehaviour
         circleCollider = GetComponent<CircleCollider2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
-	
-	void Update ()
+
+    void Update()
     {
-        if(spriteRenderer != null)
-            spriteRenderer.sortingOrder = 10000- (int)(transform.position.y * 100);
+        if (spriteRenderer != null)
+            spriteRenderer.sortingOrder = 10000 - (int)(transform.position.y * 100);
+    }
+	
+	void FixedUpdate ()
+    {
+        if (!GameState.instance.isRunning())
+            return;
         foreach (var other in colliding)
         {
             Vector2 forceDir = (Vector2)(transform.position - other.transform.position);
