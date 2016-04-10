@@ -41,7 +41,6 @@ public class SparkRenderer : MonoBehaviour
 
     public void Burn()
     {
-
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponManager>().currentWeapon != EnumWeapons.WeaponId.Biere)
             return;
         started = true;
