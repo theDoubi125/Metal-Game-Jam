@@ -9,12 +9,10 @@ public class SoundTriggerFilter : MonoBehaviour {
     {
         if (col.tag == "Player")
         {
-            print("TEST");
             AmbianceMusic ambianceMusicComponent = col.gameObject.GetComponent<AmbianceMusic>();
             if (ambianceMusicComponent)
                 ambianceMusicComponent.isFilter = isFilterValue;
         }
-        
     }
 
 
