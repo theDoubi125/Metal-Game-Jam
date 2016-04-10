@@ -41,9 +41,13 @@ public class PlayerState : MonoBehaviour {
         switch (bombeState)
         {
             case 1:
-                TelephoneBehaviour.SetTelephoneText("Bonjour Agent 118 218, calmez vous, essayez de trouver la bombe", isInConcert());
+                TelephoneBehaviour.SetDialogText("Allô !! La mission d’infiltration se passe mal !! Il y a une bombe au milieu du public !! Je ne sais pas s’ils l’ont remarquée, il n’y a pas de signe de panique mais pourtant ils agissent tous trop bizarrement!");
+                TelephoneBehaviour.instance.setDialogVisibility(true);
+                TelephoneBehaviour.SetTelephoneText("Bonjour Agent 118 218, calmez vous, essayez de trouver la bombe", false);
                 break;
             case 2:
+                TelephoneBehaviour.SetDialogText("Il y a une sorte d’énigme incompréhensible sur la bombe, c’est un  damier avec des chiffres.");
+                TelephoneBehaviour.instance.setDialogVisibility(true);
                 TelephoneBehaviour.SetTelephoneText("Omg !! Vs êtes tomB sur la nouveL génération du willi waller 2016. Vous devez absolument résoudre cette énigme et ne rien tenter d’autre.", isInConcert());
                 break;
             case 3:
@@ -59,11 +63,11 @@ public class PlayerState : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        TelephoneBehaviour.SetTelephoneText("Cher agent, je reste en contact avec vous par messages.", false);
+    }
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 }
