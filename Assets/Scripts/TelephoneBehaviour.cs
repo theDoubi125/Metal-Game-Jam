@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Text;
 
 public class TelephoneBehaviour : MonoBehaviour {
+
+	static string savedTextMessage = "";
 
 	private GameObject telephone;
 
@@ -18,6 +21,8 @@ public class TelephoneBehaviour : MonoBehaviour {
 
 		telephoneMoving = false;
 		telephoneVisible = false;
+		
+		SetTelephoneText ("Fuck la police de l'information qui fait chier par le trou de caca");
 
 	}
 	
@@ -77,20 +82,61 @@ public class TelephoneBehaviour : MonoBehaviour {
 
 	public static void SetTelephoneText(string textToWrite)
 	{
+		SetTelephoneText (textToWrite, true);
+	}
+
+	public static void SetTelephoneText(string textToWrite, bool isInConcert)
+	{
+		savedTextMessage = textToWrite;
+
 		GameObject textObject = GameObject.Find ("Telephone/Message");
 		if (textObject != null) 
 		{
-			textObject.GetComponent<TextMesh> ().text = FormatText(textToWrite);
+			if (isInConcert)
+			{
+				textObject.GetComponent<TextMesh> ().text = ObfuscateText(FormatText(textToWrite));
+			}
+			else
+			{
+				textObject.GetComponent<TextMesh> ().text = FormatText(textToWrite);
+			}
 		}
 	}
 
-	public static string FormatText(string textToWrite)
+	public static void SetMessageVisible(bool visible)
+	{
+		SetTelephoneText (savedTextMessage, !visible);
+	}
+
+	private static string ObfuscateText(string textToWrite)
+	{
+		StringBuilder textToChange = new StringBuilder (textToWrite);
+		for (int i=0; i<textToChange.Length; ++i)
+		{
+			char c = textToChange[i];
+			if (c == '\n')
+			{
+				continue;
+			}
+			if (Random.value*5 > 1)
+			{
+				textToChange[i] = '*';
+			}
+		}
+		return textToChange.ToString();
+	}
+
+	private static string FormatText(string textToWrite)
 	{
 		string textToReturn = "";
 
 		for (int i=0; i<7; ++i) //phone has capacity of 7 lines
 		{
-			string currentSubstring = textToWrite.Substring(0,19);
+			string currentSubstring = textToWrite;
+			if (textToWrite.Length >= 19)
+			{
+				currentSubstring = textToWrite.Substring(0,19);
+			}
 			int lastWhiteSpace = currentSubstring.LastIndexOf(" ");
 			if (lastWhiteSpace == -1)
 			{
