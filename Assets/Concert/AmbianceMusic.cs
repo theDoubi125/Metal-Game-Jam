@@ -43,8 +43,8 @@ public class AmbianceMusic : MonoBehaviour {
         
         if(isFilter)
         {
-            if (lowFilter.cutoffFrequency > 1500)
-                lowFilter.cutoffFrequency -= 8500*Time.deltaTime;
+            if (lowFilter.cutoffFrequency > 1000)
+                lowFilter.cutoffFrequency -= 10500*Time.deltaTime;
             else if (lowFilter.cutoffFrequency > minLowFilter)
                 lowFilter.cutoffFrequency -= 300 * Time.deltaTime;
             else
