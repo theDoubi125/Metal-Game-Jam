@@ -6,34 +6,56 @@ public class AmbianceMusic : MonoBehaviour {
     private AudioSource audioSource;
     private AudioLowPassFilter lowFilter;
 
+    public AudioClip[] backgroundMusics;
+
+    public int musicIndex = 0;
+
     public bool isFilter = false;
+
+    public int minLowFilter = 400;
+
+
 
     // Use this for initialization
     void Start () {
         audioSource = GetComponent<AudioSource>();
         lowFilter = GetComponent<AudioLowPassFilter>();
+        audioSource.clip = backgroundMusics[musicIndex];
+        audioSource.Play();
 
+    }
+
+
+    void NextSound()
+    {
+        musicIndex++;
+        if (musicIndex >= backgroundMusics.Length) musicIndex = 0;
+        audioSource.clip = backgroundMusics[musicIndex];
         audioSource.Play();
     }
 
-    // Update is called once per frame
-    void Update () {
+
+        // Update is called once per frame
+        void Update () {
+
+        if (!audioSource.isPlaying)
+            NextSound();
         
         if(isFilter)
         {
-            if (lowFilter.cutoffFrequency > 2000)
-                lowFilter.cutoffFrequency -= 100;
-            else if (lowFilter.cutoffFrequency > 200)
-                lowFilter.cutoffFrequency -= 10;
+            if (lowFilter.cutoffFrequency > 1500)
+                lowFilter.cutoffFrequency -= 8500*Time.deltaTime;
+            else if (lowFilter.cutoffFrequency > minLowFilter)
+                lowFilter.cutoffFrequency -= 300 * Time.deltaTime;
             else
-                lowFilter.cutoffFrequency = 200;
+                lowFilter.cutoffFrequency = minLowFilter;
         }
         else
         {
-            if (lowFilter.cutoffFrequency < 2000)
-                lowFilter.cutoffFrequency += 10;
+            if (lowFilter.cutoffFrequency < minLowFilter)
+                lowFilter.cutoffFrequency += 300 * Time.deltaTime;
             else if (lowFilter.cutoffFrequency < 22000)
-                lowFilter.cutoffFrequency += 100;
+                lowFilter.cutoffFrequency += 3000 * Time.deltaTime;
             else
                 lowFilter.cutoffFrequency = 22000;
         }
