@@ -5,9 +5,12 @@ public class UIManager : MonoBehaviour
 {
     public GameObject bombUI, toolIconUI, bottomUI;
 
+    public static UIManager instance;
+
 	void Start () {
-	
-	}
+        instance = this;
+
+    }
 	
 	void Update () {
         if (Input.GetButtonDown("Cancel"))
