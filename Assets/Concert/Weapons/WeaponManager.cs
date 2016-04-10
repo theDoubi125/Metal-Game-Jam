@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+
 public class WeaponManager : MonoBehaviour {
 
     public EnumWeapons.WeaponId currentWeapon;
@@ -12,7 +14,7 @@ public class WeaponManager : MonoBehaviour {
         if (guiWeapons != null && guiWeapons.Length > 0)
         {
             Debug.Log("ok");
-            guiWeapons[0].GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("Weapons/arme" + (int)currentWeapon, typeof(Sprite));
+            guiWeapons[0].GetComponent<Image>().sprite = (Sprite)Resources.Load("Weapons/arme" + (int)currentWeapon, typeof(Sprite));
         }
     }
 
