@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnterListener : MonoBehaviour {
+public class FinalSceneOpener : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,8 +13,7 @@ public class EnterListener : MonoBehaviour {
 		
 		if (Input.GetKeyUp (KeyCode.Space) || Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp(KeyCode.Mouse0)) 
 		{
-			Application.LoadLevel("IntroScene");
+			Application.LoadLevel("FinalScene");
 		}
-	
 	}
 }

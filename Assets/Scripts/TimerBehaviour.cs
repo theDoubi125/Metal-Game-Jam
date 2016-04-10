@@ -52,6 +52,6 @@ public class TimerBehaviour : MonoBehaviour {
 
 	private void EndGame()
 	{
-		//make the bomb go kaboom
+		Application.LoadLevel ("GameOverScene");
 	}
 }
