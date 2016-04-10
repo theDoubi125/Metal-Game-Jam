@@ -12,7 +12,10 @@ public class WeaponManager : MonoBehaviour {
         GameObject[] guiWeapons = GameObject.FindGameObjectsWithTag("GUIWeapons");
         if (guiWeapons != null && guiWeapons.Length > 0)
         {
-            guiWeapons[0].GetComponent<Image>().sprite = (Sprite)Resources.Load("Weapons/arme" + (int)currentWeapon, typeof(Sprite));
+            Sprite sprite = (Sprite)Resources.Load("Weapons/arme" + (int)currentWeapon, typeof(Sprite));
+            print("Sprite");
+            ToolCursor.instance.SelectTool(sprite);
+            guiWeapons[0].GetComponent<Image>().sprite = sprite;
             print("done");
         }
     }
