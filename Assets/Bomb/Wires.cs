@@ -22,6 +22,7 @@ public class Wires : MonoBehaviour {
     {
         print("CUT SECOND");
         CutWire(2);
+		Application.LoadLevel ("GameOverScene");
     }
 
     void CutWire(int wire)
