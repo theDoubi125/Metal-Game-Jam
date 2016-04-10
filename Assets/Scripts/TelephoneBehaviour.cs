@@ -7,7 +7,9 @@ public class TelephoneBehaviour : MonoBehaviour {
 
 	static string savedTextMessage = "";
 
-	private GameObject telephone;
+    public static TelephoneBehaviour instance;
+
+    private GameObject telephone;
 	private GameObject telephoneText;
 
 	bool telephoneMoving;
@@ -18,8 +20,8 @@ public class TelephoneBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-		telephone = GameObject.Find ("PhoneEcran");
+        instance = this;
+        telephone = GameObject.Find ("PhoneEcran");
 		telephoneText = GameObject.Find ("PhoneMessage");
 
 		telephoneMoving = false;
@@ -38,6 +40,12 @@ public class TelephoneBehaviour : MonoBehaviour {
 		}
 	
 	}
+
+
+    public bool isTelephoneVisible()
+    {
+        return  telephoneVisible;
+    }
 
 	private void MovePhone()
 	{
@@ -71,7 +79,7 @@ public class TelephoneBehaviour : MonoBehaviour {
 
 	}
 
-	private void InitMovePhone()
+	public void InitMovePhone()
 	{
 		telephoneMoving = true;
 		telephoneVisible = !telephoneVisible;
