@@ -25,6 +25,8 @@ public class CirclePitBehaviour : MoshPitBehaviour
 
     void FixedUpdate()
     {
+        if (!GameState.instance.isRunning())
+            return;
         Vector2 pushDir = (Vector2)Vector3.Cross(((Vector3)target - transform.position), new Vector3(0, 0, 1));
         Vector2 getCloserDir = target - (Vector2)transform.position;
         body.AddForce(pushDir.normalized * circleStrength);

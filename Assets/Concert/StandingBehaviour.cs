@@ -19,7 +19,9 @@ public class StandingBehaviour : MoshPitBehaviour
 
     void FixedUpdate()
     {
-        if(Vector2.Distance(target, transform.position) > areaRadius)
+        if (!GameState.instance.isRunning())
+            return;
+        if((target - (Vector2)transform.position).SqrMagnitude() > areaRadius* areaRadius)
         {
             Vector2 getCloserDir = target - (Vector2)transform.position;
             body.AddForce(getCloserDir.normalized * replaceSpeed);

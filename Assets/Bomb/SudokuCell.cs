@@ -10,7 +10,8 @@ public class SudokuCell : MonoBehaviour {
     float delayBeforeBreak = 0.2f;
     int inputCountToBreak = 4;
     float breakTimer;
-    int inputCount; 
+    int inputCount;
+    public Sprite brokenKey;
 
 	void Start ()
     {
@@ -37,7 +38,7 @@ public class SudokuCell : MonoBehaviour {
         breakTimer = delayBeforeBreak;
         if (inputCount >= inputCountToBreak)
         {
-            GetComponent<Image>().color = Color.gray;
+            GetComponent<Image>().sprite = brokenKey;
             GetComponent<Button>().enabled = false;
         }
     }

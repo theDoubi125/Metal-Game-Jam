@@ -9,13 +9,13 @@ public class ToolCursor : MonoBehaviour
 
 	void Start ()
     {
-        img = GetComponent<Image>();
+        img = GetComponentInChildren<Image>();
         img.sprite = toolIcons[0];
 	}
 	
 	void Update ()
     {
-        transform.position = (Vector2)Input.mousePosition + new Vector2(img.sprite.rect.width/2, -img.sprite.rect.height/2);
+        transform.position = (Vector2)Input.mousePosition;
 	}
 
     void SelectTool(Sprite icon)
