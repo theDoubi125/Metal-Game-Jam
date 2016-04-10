@@ -3,7 +3,7 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject bombUI, toolIconUI;
+    public GameObject bombUI, toolIconUI, bottomUI;
 
 	void Start () {
 	
@@ -12,9 +12,10 @@ public class UIManager : MonoBehaviour
 	void Update () {
         if (Input.GetButtonDown("Cancel"))
         {
-            if(bombUI.active)
+            if (bombUI.activeSelf)
             {
                 bombUI.SetActive(false);
+                bottomUI.SetActive(false);
                 toolIconUI.SetActive(false);
                 GameState.instance.SetRunning(true);
             }
@@ -22,6 +23,7 @@ public class UIManager : MonoBehaviour
             {
 
                 bombUI.SetActive(true);
+                bottomUI.SetActive(true);
                 toolIconUI.SetActive(true);
                 GameState.instance.SetRunning(false);
             }
