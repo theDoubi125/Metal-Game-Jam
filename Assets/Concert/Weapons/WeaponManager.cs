@@ -10,10 +10,8 @@ public class WeaponManager : MonoBehaviour {
     {
         currentWeapon = newWeapon;
         GameObject[] guiWeapons = GameObject.FindGameObjectsWithTag("GUIWeapons");
-        Debug.Log(guiWeapons);
         if (guiWeapons != null && guiWeapons.Length > 0)
         {
-            Debug.Log("ok");
             guiWeapons[0].GetComponent<Image>().sprite = (Sprite)Resources.Load("Weapons/arme" + (int)currentWeapon, typeof(Sprite));
         }
     }

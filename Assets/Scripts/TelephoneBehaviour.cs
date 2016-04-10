@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Text;
 
@@ -6,23 +7,25 @@ public class TelephoneBehaviour : MonoBehaviour {
 
 	static string savedTextMessage = "";
 
-	private GameObject telephone;
+    public static TelephoneBehaviour instance;
+
+    private GameObject telephone;
+	private GameObject telephoneText;
 
 	bool telephoneMoving;
 	bool telephoneVisible;
 
-	float visiblePhonePos = -3.5f;
-	float hiddenPhonePos = -6.5f;
+	float visiblePhonePos = 125f;
+	float hiddenPhonePos = -125f;
 
 	// Use this for initialization
 	void Start () {
-
-		telephone = GameObject.Find ("Telephone");
+        instance = this;
+        telephone = GameObject.Find ("PhoneEcran");
+		telephoneText = GameObject.Find ("PhoneMessage");
 
 		telephoneMoving = false;
 		telephoneVisible = false;
-		
-		SetTelephoneText ("Fuck la police de l'information qui fait chier par le trou de caca");
 
 	}
 	
@@ -38,13 +41,20 @@ public class TelephoneBehaviour : MonoBehaviour {
 	
 	}
 
+
+    public bool isTelephoneVisible()
+    {
+        return  telephoneVisible;
+    }
+
 	private void MovePhone()
 	{
 		if (telephoneVisible) 
 		{
 			if (telephone.transform.position.y < visiblePhonePos) 
 			{
-				telephone.transform.Translate(new Vector3(0,Time.deltaTime*3,0));
+				telephone.transform.Translate(new Vector3(0,Time.deltaTime*125,0));
+				telephoneText.transform.Translate(new Vector3(0,Time.deltaTime*125,0));
 			}
 
 			if (telephone.transform.position.y >= visiblePhonePos)
@@ -57,7 +67,8 @@ public class TelephoneBehaviour : MonoBehaviour {
 		{
 			if (telephone.transform.position.y > hiddenPhonePos) 
 			{
-				telephone.transform.Translate(new Vector3(0,- Time.deltaTime*3,0));
+				telephone.transform.Translate(new Vector3(0,- Time.deltaTime*125,0));
+				telephoneText.transform.Translate(new Vector3(0,- Time.deltaTime*125,0));
             }
 
 			if (telephone.transform.position.y <= hiddenPhonePos) 
@@ -68,7 +79,7 @@ public class TelephoneBehaviour : MonoBehaviour {
 
 	}
 
-	private void InitMovePhone()
+	public void InitMovePhone()
 	{
 		telephoneMoving = true;
 		telephoneVisible = !telephoneVisible;
@@ -89,16 +100,16 @@ public class TelephoneBehaviour : MonoBehaviour {
 	{
 		savedTextMessage = textToWrite;
 
-		GameObject textObject = GameObject.Find ("Telephone/Message");
+		GameObject textObject = GameObject.Find ("Telephone/PhoneMessage");
 		if (textObject != null) 
 		{
 			if (isInConcert)
 			{
-				textObject.GetComponent<TextMesh> ().text = ObfuscateText(FormatText(textToWrite));
+				textObject.GetComponent<Text> ().text = ObfuscateText(textToWrite);
 			}
 			else
 			{
-				textObject.GetComponent<TextMesh> ().text = FormatText(textToWrite);
+				textObject.GetComponent<Text> ().text = textToWrite;
 			}
 		}
 	}
@@ -114,7 +125,7 @@ public class TelephoneBehaviour : MonoBehaviour {
 		for (int i=0; i<textToChange.Length; ++i)
 		{
 			char c = textToChange[i];
-			if (c == '\n')
+			if (c == '\n' || c == ' ')
 			{
 				continue;
 			}
@@ -126,6 +137,7 @@ public class TelephoneBehaviour : MonoBehaviour {
 		return textToChange.ToString();
 	}
 
+	//@deprecated
 	private static string FormatText(string textToWrite)
 	{
 		string textToReturn = "";
