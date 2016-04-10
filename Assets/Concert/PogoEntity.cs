@@ -11,16 +11,20 @@ public class PogoEntity : MonoBehaviour
     private Rigidbody2D body;
     private CircleCollider2D circleCollider;
     private float maxForce = 200;
+    private SpriteRenderer spriteRenderer;
 
     void Start ()
     {
         body = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
-	}
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
 	
 	void Update ()
     {
-	    foreach(var other in colliding)
+        if(spriteRenderer != null)
+            spriteRenderer.sortingOrder = 10000- (int)(transform.position.y * 100);
+        foreach (var other in colliding)
         {
             Vector2 forceDir = (Vector2)(transform.position - other.transform.position);
             float force = Mathf.Min(strengthRatio / forceDir.magnitude, maxForce);
