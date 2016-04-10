@@ -27,7 +27,6 @@ public class PlayerState : MonoBehaviour {
     void changeRoomEvent()
     {
         print("Change room : " + currentRoom+" "+ bombeState);
-        bombeState++;
 
         SetTelephoneTextDependingOnBombeState();
 
@@ -38,20 +37,29 @@ public class PlayerState : MonoBehaviour {
 
     void SetTelephoneTextDependingOnBombeState()
     {
+
+        if (bombeState == 0)
+        {
+           bombeState++;
+        }
+
+
         switch (bombeState)
         {
             case 1:
-                TelephoneBehaviour.SetDialogText("Allô !! La mission d’infiltration se passe mal !! Il y a une bombe au milieu du public !! Je ne sais pas s’ils l’ont remarquée, il n’y a pas de signe de panique mais pourtant ils agissent tous trop bizarrement!");
+                TelephoneBehaviour.SetDialogText("La mission d’infiltration se passe mal ! J’ai appris qu’il y avait une bombe dans la salle !! Je ne sais pas s’ils l’ont remarquée, il n’y a pas de signe de panique mais pourtant ils agissent tous trop bizarrement! ");
                 TelephoneBehaviour.instance.setDialogVisibility(true);
                 TelephoneBehaviour.SetTelephoneText("Bonjour Agent 118 218, calmez vous, essayez de trouver la bombe", false);
                 break;
             case 2:
-                TelephoneBehaviour.SetDialogText("Il y a une sorte d’énigme incompréhensible sur la bombe, c’est un  damier avec des chiffres.");
+                /*
+                TelephoneBehaviour.SetDialogText("Il y a une sorte d’énigme incompréhensible sur la bombe, c’est un damier avec des chiffres.");
                 TelephoneBehaviour.instance.setDialogVisibility(true);
-                TelephoneBehaviour.SetTelephoneText("Omg !! Vs êtes tomB sur la nouveL génération du willi waller 2016. Vous devez absolument résoudre cette énigme et ne rien tenter d’autre.", isInConcert());
+                TelephoneBehaviour.SetTelephoneText("Oh mon dieu !! Vous êtes tombé sur la nouvelle génération Willi Waller 2016. Vous devez absolument résoudre cette énigme pour désamorcer la bombe. Surtout ne tentez rien d’autre.", isInConcert());
+                */
                 break;
             case 3:
-                TelephoneBehaviour.SetTelephoneText("", isInConcert());
+               // TelephoneBehaviour.SetTelephoneText("", isInConcert());
                 break;
         }
 
