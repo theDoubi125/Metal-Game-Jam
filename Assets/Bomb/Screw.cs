@@ -45,6 +45,8 @@ public class Screw : MonoBehaviour
 
     public void Turn()
     {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponManager>().currentWeapon != EnumWeapons.WeaponId.Tournevis)
+            return;
         if(currentTime <= 0)
         {
             currentTime = stepDuration;

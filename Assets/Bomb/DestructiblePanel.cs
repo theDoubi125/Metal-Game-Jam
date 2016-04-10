@@ -21,6 +21,8 @@ public class DestructiblePanel : MonoBehaviour
 
     public void Hit()
     {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponManager>().currentWeapon != EnumWeapons.WeaponId.Marteau)
+            return;
         health--;
         if (health <= 0)
             dead = true;

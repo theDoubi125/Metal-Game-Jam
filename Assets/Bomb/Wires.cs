@@ -24,6 +24,8 @@ public class Wires : MonoBehaviour {
 
     void CutWire(int wire)
     {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponManager>().currentWeapon != EnumWeapons.WeaponId.Pince)
+            return;
         currentState += wire;
         foreach (Image i in wireStates)
         {
