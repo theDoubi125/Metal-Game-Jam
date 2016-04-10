@@ -10,6 +10,9 @@ public class Screw : MonoBehaviour
     public float currentTime;
     private bool dead;
     private float fallSpeed;
+    public ScrewedPanel parentPanel;
+
+    public bool isDead { get { return dead; } }
 
 	void Start ()
     {
@@ -26,6 +29,8 @@ public class Screw : MonoBehaviour
         if (currentTime <= 0 && currentStep >= stepsToRemove)
         {
             dead = true;
+            if(parentPanel != null)
+                parentPanel.OnScrewRemoved();
         }
         if(dead)
         {
